@@ -1,7 +1,7 @@
 -- users table
 CREATE TABLE users (
     id UUID PRIMARY KEY NOT NULL,
-    username TEXT NOT NULL,
+    username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL
 );
 

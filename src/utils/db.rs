@@ -37,7 +37,7 @@ where
             + 'static,
         T: Send + 'static {
             let pool = self.connection_pool.clone();
-            let mut func = Some(f);
-            (func.take().unwrap())(pool.get().unwrap())
+            let mut f = Some(f);
+            (f.take().unwrap())(pool.get().unwrap())
     }
 }
