@@ -1,7 +1,8 @@
 use diesel::{Insertable, Queryable, AsChangeset, Identifiable};
 use serde::{Serialize, Deserialize};
-use crate::schema::users;
-use super::uuid::UserID;
+use crate::schema::{users};
+use super::uuid::{UserID, APITokenID};
+use super::api_tokens::*;
 use diesel::result::Error;
 use uuid::Uuid;
 
@@ -33,6 +34,14 @@ impl User {
         self.password = password
     }
 
+    pub async fn get_user(name: String, pool: &ConnPool) -> Result<Self, Error> {
+        use crate::schema::users::dsl::*;
+        pool.run(move |conn| {
+            users.filter(username.eq(&name))
+            .first(&conn)
+        }).await
+    }
+
     pub async fn update(self, pool: &ConnPool) -> Result<Self, Error> {
         use crate::schema::users::dsl::*;
         pool.run(move |conn| {
@@ -48,6 +57,17 @@ impl User {
         pool.run(move |conn| {
             diesel::delete(users.find(self.id))
                 .execute(&conn)
+        })
+        .await
+    }
+
+    pub async fn new_token(self, pool: &ConnPool) -> Result<APIToken, Error> {
+        use crate::schema::api_tokens::dsl::*;
+        let new_token = NewApiToken::new(APITokenID(Uuid::new_v4()), self.id);
+        pool.run(move |conn| {
+            diesel::insert_into(api_tokens)
+                .values(&new_token)
+                .get_result(&conn)
         })
         .await
     }
@@ -90,9 +110,10 @@ impl NewUser {
     }
 
     pub async fn insert(self, pool: &ConnPool) -> Result<User, Error> {
+        use crate::schema::users::dsl::*;
         let real_user = RealNewUser::new(self);
         pool.run(move |conn| {
-            diesel::insert_into(users::table)
+            diesel::insert_into(users)
                 .values(&real_user)
                 .get_result(&conn)
         })

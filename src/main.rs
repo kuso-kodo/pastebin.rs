@@ -21,6 +21,7 @@ async fn main() -> Result<(), std::io::Error> {
     let mut app = tide::with_state(pool);
 
     app.at("/register").post(crate::api::user::register);
+    app.at("/login").post(crate::api::user::login);
 
     app.listen("127.0.0.1:8080").await?;
     Ok(())
