@@ -1,6 +1,7 @@
 use crate::models::api_tokens::*;
 use crate::models::uuid::*;
 use crate::utils::Error;
+use crate::utils::ResultWithResponse;
 use crate::ConnPool;
 use http::status::StatusCode;
 use serde::{Deserialize, Serialize};
@@ -19,16 +20,12 @@ pub async fn logout(mut req: Request<ConnPool>) -> Response {
             match token.delete(&pool).await {
                 Ok(result) => Response::new(200).body_json(&result).unwrap(),
                 Err(_) => Response::new(StatusCode::BAD_REQUEST.as_u16())
-                    .body_json(&Error::new(
-                        StatusCode::BAD_REQUEST.canonical_reason().unwrap(),
-                    ))
+                    .body_json(&Error::from_http_status(StatusCode::BAD_REQUEST))
                     .unwrap(),
             }
         }
         Err(_) => Response::new(StatusCode::BAD_REQUEST.as_u16())
-            .body_json(&Error::new(
-                StatusCode::BAD_REQUEST.canonical_reason().unwrap(),
-            ))
+            .body_json(&Error::from_http_status(StatusCode::BAD_REQUEST))
             .unwrap(),
     }
 }

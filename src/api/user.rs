@@ -18,16 +18,12 @@ pub async fn register(mut req: Request<ConnPool>) -> Response {
             match new_user.insert(&pool).await {
                 Ok(result) => Response::new(200).body_json(&result).unwrap(),
                 Err(_) => Response::new(StatusCode::CONFLICT.as_u16())
-                    .body_json(&Error::new(
-                        StatusCode::CONFLICT.canonical_reason().unwrap(),
-                    ))
+                    .body_json(&Error::from_http_status(StatusCode::CONFLICT))
                     .unwrap(),
             }
         }
         Err(_) => Response::new(StatusCode::BAD_REQUEST.as_u16())
-            .body_json(&Error::new(
-                StatusCode::BAD_REQUEST.canonical_reason().unwrap(),
-            ))
+            .body_json(&Error::from_http_status(StatusCode::BAD_REQUEST))
             .unwrap(),
     }
 }
@@ -43,23 +39,17 @@ pub async fn login(mut req: Request<ConnPool>) -> Response {
                         Response::new(200).body_json(&token).unwrap()
                     } else {
                         Response::new(StatusCode::NOT_ACCEPTABLE.as_u16())
-                            .body_json(&Error::new(
-                                StatusCode::NOT_ACCEPTABLE.canonical_reason().unwrap(),
-                            ))
+                            .body_json(&Error::from_http_status(StatusCode::CONFLICT))
                             .unwrap()
                     }
                 }
                 Err(_) => Response::new(StatusCode::CONFLICT.as_u16())
-                    .body_json(&Error::new(
-                        StatusCode::CONFLICT.canonical_reason().unwrap(),
-                    ))
+                    .body_json(&Error::from_http_status(StatusCode::CONFLICT))
                     .unwrap(),
             }
         }
         Err(_) => Response::new(StatusCode::BAD_REQUEST.as_u16())
-            .body_json(&Error::new(
-                StatusCode::BAD_REQUEST.canonical_reason().unwrap(),
-            ))
+            .body_json(&Error::from_http_status(StatusCode::BAD_REQUEST))
             .unwrap(),
     }
 }
