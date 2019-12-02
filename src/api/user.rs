@@ -3,24 +3,12 @@ use crate::models::users::*;
 use tide::*;
 use serde::{Serialize, Deserialize};
 use http::status::StatusCode;
-
-#[derive(Serialize, Deserialize)]
-struct Error {
-    error_info: String
-}
+use crate::utils::error::Error;
 
 #[derive(Serialize, Deserialize)]
 struct LoginInfo {
     username: String,
     password: String
-}
-
-impl Error {
-    fn new(error_info: &str) -> Self {
-        Error {
-            error_info: error_info.to_string()
-        }
-    }
 }
 
 pub async fn register(mut req: Request<ConnPool>) -> Response {
