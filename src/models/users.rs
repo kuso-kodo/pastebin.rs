@@ -1,9 +1,9 @@
-use diesel::{Insertable, Queryable, AsChangeset, Identifiable};
-use serde::{Serialize, Deserialize};
-use crate::schema::{users};
-use super::uuid::{UserID, APITokenID};
 use super::api_tokens::*;
+use super::uuid::{APITokenID, UserID};
+use crate::schema::users;
 use diesel::result::Error;
+use diesel::{AsChangeset, Identifiable, Insertable, Queryable};
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 use crate::ConnPool;
@@ -14,7 +14,7 @@ pub struct User {
     id: UserID,
     username: String,
     #[serde(skip_serializing)]
-    password: String
+    password: String,
 }
 
 impl User {
@@ -36,10 +36,8 @@ impl User {
 
     pub async fn get_user(name: String, pool: &ConnPool) -> Result<Self, Error> {
         use crate::schema::users::dsl::*;
-        pool.run(move |conn| {
-            users.filter(username.eq(&name))
-            .first(&conn)
-        }).await
+        pool.run(move |conn| users.filter(username.eq(&name)).first(&conn))
+            .await
     }
 
     pub async fn update(self, pool: &ConnPool) -> Result<Self, Error> {
@@ -54,11 +52,8 @@ impl User {
 
     pub async fn delete(self, pool: &ConnPool) -> Result<usize, Error> {
         use crate::schema::users::dsl::*;
-        pool.run(move |conn| {
-            diesel::delete(users.find(self.id))
-                .execute(&conn)
-        })
-        .await
+        pool.run(move |conn| diesel::delete(users.find(self.id)).execute(&conn))
+            .await
     }
 
     pub async fn new_token(self, pool: &ConnPool) -> Result<APIToken, Error> {
@@ -78,15 +73,15 @@ impl User {
 pub struct RealNewUser {
     id: UserID,
     username: String,
-    password: String
+    password: String,
 }
 
 impl RealNewUser {
     pub fn new(new_user: NewUser) -> Self {
         Self {
             id: UserID(Uuid::new_v4()),
-            username: new_user.username, 
-            password: new_user.password
+            username: new_user.username,
+            password: new_user.password,
         }
     }
 }
@@ -95,18 +90,12 @@ impl RealNewUser {
 #[table_name = "users"]
 pub struct NewUser {
     username: String,
-    password: String
+    password: String,
 }
 
 impl NewUser {
-    pub fn new(
-        username: String,
-        password: String
-    ) -> NewUser {
-        NewUser {
-            username,
-            password
-        }
+    pub fn new(username: String, password: String) -> NewUser {
+        NewUser { username, password }
     }
 
     pub async fn insert(self, pool: &ConnPool) -> Result<User, Error> {

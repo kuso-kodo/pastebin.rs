@@ -1,4 +1,4 @@
-use diesel::{FromSqlRow, AsExpression};
+use diesel::{AsExpression, FromSqlRow};
 
 macro_rules! uuid_wrapper {
     ($name: ident) => {
@@ -38,7 +38,7 @@ macro_rules! uuid_wrapper {
         impl diesel::serialize::ToSql<diesel::sql_types::Uuid, diesel::pg::Pg> for $name {
             fn to_sql<W: std::io::Write>(&self, out: &mut diesel::serialize::Output<W, diesel::pg::Pg>) -> diesel::serialize::Result {
                 <uuid::Uuid as diesel::serialize::ToSql<diesel::sql_types::Uuid, diesel::pg::Pg>>::to_sql(&self.0, out)
-            }        
+            }
         }
 
         impl<A> diesel::deserialize::FromSql<A, diesel::pg::Pg> for $name {
@@ -46,7 +46,7 @@ macro_rules! uuid_wrapper {
                 uuid::Uuid::from_sql(bytes).map($name)
             }
         }
-      
+
           impl std::fmt::Display for $name {
             fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
                 write!(f, "{}", self.0.to_simple())
@@ -61,7 +61,6 @@ macro_rules! uuid_wrapper {
         }
     };
 }
-
 
 uuid_wrapper!(APITokenID);
 uuid_wrapper!(PasteID);

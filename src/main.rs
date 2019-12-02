@@ -1,10 +1,10 @@
 #[macro_use]
 extern crate diesel;
 
-mod utils;
+mod api;
 mod models;
 mod schema;
-mod api;
+mod utils;
 
 use async_std;
 use diesel::pg::PgConnection;
@@ -15,8 +15,7 @@ type ConnPool = ConnectionPool<PgConnection>;
 
 #[async_std::main]
 async fn main() -> Result<(), std::io::Error> {
-    let database_url = env::var("DATABASE_URL")
-    .expect("DATABASE_URL must be set");
+    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
     let pool = ConnectionPool::new(&database_url);
     let mut app = tide::with_state(pool);
 
