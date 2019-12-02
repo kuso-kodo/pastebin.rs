@@ -1,5 +1,5 @@
 use crate::models::users::*;
-use crate::utils::error::Error;
+use crate::utils::Error;
 use crate::ConnPool;
 use http::status::StatusCode;
 use serde::{Deserialize, Serialize};

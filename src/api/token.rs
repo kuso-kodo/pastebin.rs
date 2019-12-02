@@ -1,6 +1,6 @@
 use crate::models::api_tokens::*;
 use crate::models::uuid::*;
-use crate::utils::error::Error;
+use crate::utils::Error;
 use crate::ConnPool;
 use http::status::StatusCode;
 use serde::{Deserialize, Serialize};

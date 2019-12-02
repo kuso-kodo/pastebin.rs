@@ -9,7 +9,7 @@ mod utils;
 use async_std;
 use diesel::pg::PgConnection;
 use std::env;
-use utils::db::ConnectionPool;
+use utils::ConnectionPool;
 
 type ConnPool = ConnectionPool<PgConnection>;
 
