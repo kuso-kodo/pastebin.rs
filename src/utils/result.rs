@@ -2,12 +2,15 @@ use std::ops::Try;
 use tide::IntoResponse;
 use tide::Response;
 
+/// Our common **EndPoint** type. 
+/// Acts like original `std::Result` type.
 pub enum RResponse<T, E> {
     Valid(T),
     Invalid(E),
 }
 
 impl<T: IntoResponse, E: IntoResponse> IntoResponse for RResponse<T, E> {
+    /// Convert a `RResponse` type into `tide::Response`.
     fn into_response(self) -> Response {
         match self {
             RResponse::Valid(r) => r.into_response(),
@@ -16,6 +19,8 @@ impl<T: IntoResponse, E: IntoResponse> IntoResponse for RResponse<T, E> {
     }
 }
 
+// Implements the unstable `try_trait`.
+// Hence nightly version of rust is needed for now.
 impl<T, E> Try for RResponse<T, E> {
     type Ok = T;
     type Error = E;
@@ -34,6 +39,7 @@ impl<T, E> Try for RResponse<T, E> {
 }
 
 impl<T, E> From<std::result::Result<T, E>> for RResponse<T, E> {
+    /// Convert `std::result` into out `RResponse`.
     fn from(res: std::result::Result<T, E>) -> Self {
         match res {
             Ok(v) => RResponse::Valid(v),

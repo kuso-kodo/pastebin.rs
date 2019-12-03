@@ -2,6 +2,8 @@ use diesel::r2d2::ConnectionManager;
 use diesel::Connection;
 use r2d2::{Pool, PooledConnection};
 
+/// Async connection pool based on
+/// r2d2::Pool.
 #[derive(Clone)]
 pub struct ConnectionPool<T>
 where
