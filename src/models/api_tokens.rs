@@ -24,15 +24,13 @@ impl APIToken {
         pool.run(move |conn| api_tokens.filter(token.eq(&id)).first(&conn))
             .await
     }
-    /*
-      pub async fn get_token_by_user(id: UserID, pool: &ConnPool) -> Result<Self, Error> {
-        use crate::schema::api_tokens::dsl::*;
-        pool.run(move |conn| {
-          api_tokens.filter(user_id.eq(&id))
-            .first(&conn)
-        }).await
-      }
-    */
+
+    pub async fn check_token(id: APITokenID, pool: &ConnPool) -> bool {
+        match Self::get_token(id, pool).await {
+            Ok(_) => true,
+            Err(_) => false
+        }
+    }
 
     pub async fn delete(self, pool: &ConnPool) -> Result<usize, Error> {
         use crate::schema::api_tokens::dsl::*;

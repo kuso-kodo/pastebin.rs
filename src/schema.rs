@@ -9,7 +9,8 @@ table! {
     pastes (id) {
         id -> Uuid,
         title -> Nullable<Text>,
-        author_id -> Nullable<Uuid>,
+        content -> Text,
+        author_id -> Uuid,
     }
 }
 
@@ -24,4 +25,8 @@ table! {
 joinable!(api_tokens -> users (user_id));
 joinable!(pastes -> users (author_id));
 
-allow_tables_to_appear_in_same_query!(api_tokens, pastes, users,);
+allow_tables_to_appear_in_same_query!(
+    api_tokens,
+    pastes,
+    users,
+);

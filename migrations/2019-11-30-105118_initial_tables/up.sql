@@ -15,7 +15,8 @@ CREATE TABLE api_tokens (
 CREATE TABLE pastes (
     id UUID PRIMARY KEY NOT NULL,
     title TEXT,
-    author_id UUID,
+    content TEXT NOT NULL,
+    author_id UUID NOT NULL,
 
     FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
 );
