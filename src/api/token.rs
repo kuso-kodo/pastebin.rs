@@ -1,11 +1,9 @@
 use crate::models::api_tokens::*;
 use crate::models::uuid::*;
 use crate::utils::response::from_json;
-use crate::utils::Error;
 use crate::utils::RResponse::*;
 use crate::utils::Result;
 use crate::ConnPool;
-use http::status::StatusCode;
 use serde::{Deserialize, Serialize};
 use tide::*;
 

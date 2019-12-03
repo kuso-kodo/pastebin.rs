@@ -21,6 +21,7 @@ impl Error {
         }
     }
 
+    #[allow(unused)]
     pub fn internal_error() -> Self {
         Self::new(500, "Internal Server Error.")
     }
