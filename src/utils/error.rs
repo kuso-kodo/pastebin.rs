@@ -1,7 +1,11 @@
+use crate::utils::RResponse;
 use http::status::StatusCode;
 use serde::{Deserialize, Serialize};
+use std::fmt;
 use tide::IntoResponse;
 use tide::Response;
+
+pub type Result = RResponse<Response, Error>;
 
 #[derive(Serialize, Deserialize)]
 pub struct Error {
@@ -31,5 +35,23 @@ impl IntoResponse for Error {
         Response::new(self.error_status)
             .body_json(&self.error_info)
             .unwrap()
+    }
+}
+
+impl fmt::Debug for Error {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        fmt::Debug::fmt(&self.error_info, f)
+    }
+}
+
+impl std::convert::From<std::io::Error> for Error {
+    fn from(_: std::io::Error) -> Self {
+        Self::from_http_status(StatusCode::BAD_REQUEST)
+    }
+}
+
+impl std::convert::From<diesel::result::Error> for Error {
+    fn from(err: diesel::result::Error) -> Self {
+        Self::new(500, &err.to_string())
     }
 }
