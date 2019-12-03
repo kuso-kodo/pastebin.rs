@@ -1,8 +1,8 @@
 use super::uuid::{PasteID, UserID};
 use crate::schema::pastes;
 use diesel::result::Error;
-use diesel::{AsChangeset, Identifiable,Queryable};
-use serde::{Serialize};
+use diesel::{AsChangeset, Identifiable, Queryable};
+use serde::Serialize;
 
 use crate::ConnPool;
 use diesel::prelude::*;
@@ -24,7 +24,7 @@ impl Paste {
     pub fn title(&self) -> &str {
         match &self.title {
             Some(s) => s,
-            None => ""
+            None => "",
         }
     }
 
@@ -48,13 +48,16 @@ impl Paste {
         self.author_id
     }
 
-    pub async fn get_paste_by_id(paste_id: PasteID, pool: ConnPool) -> Result<Self, Error>{
+    pub async fn get_paste_by_id(paste_id: PasteID, pool: ConnPool) -> Result<Self, Error> {
         use crate::schema::pastes::dsl::*;
         pool.run(move |conn| pastes.filter(id.eq(&paste_id)).first(&conn))
             .await
     }
 
-    pub async fn get_paste_list_by_user_id(p_id: PasteID, pool: ConnPool) -> Result<Vec<Self>, Error>{
+    pub async fn get_paste_list_by_user_id(
+        p_id: PasteID,
+        pool: ConnPool,
+    ) -> Result<Vec<Self>, Error> {
         use crate::schema::pastes::dsl::*;
         pool.run(move |conn| pastes.filter(author_id.eq(&p_id)).load(&conn))
             .await

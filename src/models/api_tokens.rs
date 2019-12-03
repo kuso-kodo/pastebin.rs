@@ -28,7 +28,7 @@ impl APIToken {
     pub async fn check_token(id: APITokenID, pool: &ConnPool) -> bool {
         match Self::get_token(id, pool).await {
             Ok(_) => true,
-            Err(_) => false
+            Err(_) => false,
         }
     }
 
