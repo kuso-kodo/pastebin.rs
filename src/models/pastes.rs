@@ -17,6 +17,7 @@ pub struct Paste {
 }
 
 impl Paste {
+    /// Construct a new paste.
     pub fn new(id: PasteID, title: Option<String>, content: String, author_id: UserID) -> Self {
         Paste {
             id,
@@ -57,12 +58,14 @@ impl Paste {
         self.author_id
     }
 
+    /// Get a paste instance by its ID.
     pub async fn get_paste_by_id(paste_id: PasteID, pool: &ConnPool) -> Result<Self, Error> {
         use crate::schema::pastes::dsl::*;
         pool.run(move |conn| pastes.filter(id.eq(&paste_id)).first(&conn))
             .await
     }
 
+    /// Get all pastes by the user iD.
     pub async fn get_paste_list_by_user_id(
         p_id: PasteID,
         pool: &ConnPool,
@@ -72,6 +75,7 @@ impl Paste {
             .await
     }
 
+    /// Insert our paste into the database.
     pub async fn insert(self, pool: &ConnPool) -> Result<Self, Error> {
         use crate::schema::pastes::dsl::*;
         pool.run(move |conn| diesel::insert_into(pastes).values(&self).get_result(&conn))

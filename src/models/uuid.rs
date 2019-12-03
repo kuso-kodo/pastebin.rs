@@ -1,5 +1,6 @@
 use diesel::{AsExpression, FromSqlRow};
 
+// Build a uuid class based on uuid::Uuid.
 macro_rules! uuid_wrapper {
     ($name: ident) => {
         #[derive(Debug, Hash, PartialEq, Eq, PartialOrd, Ord, Clone, Copy, FromSqlRow, AsExpression)]
