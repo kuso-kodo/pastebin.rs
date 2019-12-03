@@ -50,4 +50,14 @@ impl NewApiToken {
     pub fn new(token: APITokenID, user_id: UserID) -> Self {
         NewApiToken { token, user_id }
     }
+
+    pub async fn insert(self, pool: &ConnPool) -> Result<APIToken, Error> {
+        use crate::schema::api_tokens::dsl::*;
+        pool.run(move |conn| {
+            diesel::insert_into(api_tokens)
+                .values(&self)
+                .get_result(&conn)
+        })
+        .await
+    }
 }

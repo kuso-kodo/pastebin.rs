@@ -8,8 +8,8 @@ use serde::{Deserialize, Serialize};
 use tide::*;
 
 #[derive(Serialize, Deserialize)]
-struct Token {
-    token: APITokenID,
+pub struct Token {
+    pub token: APITokenID,
 }
 
 pub async fn logout(mut req: Request<ConnPool>) -> Result {

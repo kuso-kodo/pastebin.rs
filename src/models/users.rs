@@ -57,14 +57,8 @@ impl User {
     }
 
     pub async fn new_token(self, pool: &ConnPool) -> Result<APIToken, Error> {
-        use crate::schema::api_tokens::dsl::*;
         let new_token = NewApiToken::new(APITokenID(Uuid::new_v4()), self.id);
-        pool.run(move |conn| {
-            diesel::insert_into(api_tokens)
-                .values(&new_token)
-                .get_result(&conn)
-        })
-        .await
+        new_token.insert(&pool).await
     }
 }
 

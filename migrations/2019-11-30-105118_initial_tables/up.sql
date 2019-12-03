@@ -20,3 +20,5 @@ CREATE TABLE pastes (
 
     FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+INSERT INTO users VALUES ('00000000-0000-0000-0000-000000000000', 'Anonymous', ' ');
