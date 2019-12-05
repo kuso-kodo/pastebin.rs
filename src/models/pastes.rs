@@ -12,16 +12,18 @@ use diesel::prelude::*;
 pub struct Paste {
     id: PasteID,
     title: Option<String>,
+    lang: i32,
     content: String,
     author_id: UserID,
 }
 
 impl Paste {
     /// Construct a new paste.
-    pub fn new(id: PasteID, title: Option<String>, content: String, author_id: UserID) -> Self {
+    pub fn new(id: PasteID, title: Option<String>, lang: i32, content: String, author_id: UserID) -> Self {
         Paste {
             id,
             title,
+            lang,
             content,
             author_id,
         }
@@ -67,7 +69,7 @@ impl Paste {
 
     /// Get all pastes by the user iD.
     pub async fn get_paste_list_by_user_id(
-        p_id: PasteID,
+        p_id: UserID,
         pool: &ConnPool,
     ) -> Result<Vec<Self>, Error> {
         use crate::schema::pastes::dsl::*;

@@ -25,6 +25,7 @@ async fn main() -> Result<(), std::io::Error> {
     app.at("/logout").post(crate::api::token::logout);
     app.at("/get").post(crate::api::paste::get);
     app.at("/new").post(crate::api::paste::new);
+    app.at("/:username/list").get(crate::api::paste::list);
 
     app.listen("127.0.0.1:8080").await?;
     Ok(())

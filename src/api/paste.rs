@@ -7,6 +7,8 @@ use crate::ConnPool;
 use serde::{Deserialize, Serialize};
 use tide::*;
 use uuid::Uuid;
+use crate::utils::Error;
+use crate::models::users::User;
 
 #[derive(Serialize, Deserialize)]
 pub struct PasteRequest {
@@ -17,6 +19,7 @@ pub struct PasteRequest {
 pub struct NewPaste {
     title: Option<String>,
     content: String,
+    lang: i32,
     author_id: Option<UserID>,
 }
 
@@ -25,6 +28,7 @@ impl NewPaste {
         Paste::new(
             PasteID(Uuid::new_v4()),
             self.title,
+            self.lang, 
             self.content,
             self.author_id.unwrap_or_else(|| UserID(Uuid::nil())),
         )
@@ -36,6 +40,14 @@ pub async fn get(mut req: Request<ConnPool>) -> Result {
     let pool = req.state();
     let paste = Paste::get_paste_by_id(request.paste, &pool).await?;
     Valid(from_json(&paste))
+}
+
+pub async fn list(req: Request<ConnPool>) -> Result {
+    let username:String = req.param("username")?;
+    let pool = req.state();
+    let user_id = User::get_user(username, &pool).await?;
+    let pastes = Paste::get_paste_list_by_user_id(user_id.id(), &pool).await?;
+    Valid(from_json(&pastes))
 }
 
 pub async fn new(mut req: Request<ConnPool>) -> Result {

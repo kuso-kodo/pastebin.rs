@@ -70,3 +70,10 @@ impl std::convert::From<diesel::result::Error> for Error {
         Self::internal_error()
     }
 }
+
+impl std::convert::From<!> for Error {
+    /// Returns `BAD_REQUEST` to client when an diesel::result::Error occurs.
+    fn from(_: !) -> Self {
+        Self::from_http_status(StatusCode::BAD_REQUEST)
+    }
+}
