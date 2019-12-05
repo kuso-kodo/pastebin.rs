@@ -19,7 +19,13 @@ pub struct Paste {
 
 impl Paste {
     /// Construct a new paste.
-    pub fn new(id: PasteID, title: Option<String>, lang: i32, content: String, author_id: UserID) -> Self {
+    pub fn new(
+        id: PasteID,
+        title: Option<String>,
+        lang: i32,
+        content: String,
+        author_id: UserID,
+    ) -> Self {
         Paste {
             id,
             title,

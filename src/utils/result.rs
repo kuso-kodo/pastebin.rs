@@ -2,7 +2,7 @@ use std::ops::Try;
 use tide::IntoResponse;
 use tide::Response;
 
-/// Our common **EndPoint** type. 
+/// Our common **EndPoint** type.
 /// Acts like original `std::Result` type.
 pub enum RResponse<T, E> {
     Valid(T),

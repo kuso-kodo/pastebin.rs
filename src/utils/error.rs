@@ -8,12 +8,12 @@ use tide::Response;
 pub type Result = RResponse<Response, Error>;
 
 /// The generic Error type in out application.
-/// 
+///
 /// This struct implements a **IntoResponse** trait
 /// provided by __tide__ , hence it can be converted
 /// into Response directly. In the struct, the **error_status**
 /// field contains the HTTP status code which specifies the
-/// error type and **error_info** which may contain the 
+/// error type and **error_info** which may contain the
 /// reason of the Error.
 #[derive(Serialize, Deserialize)]
 pub struct Error {

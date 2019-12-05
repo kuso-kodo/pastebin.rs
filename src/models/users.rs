@@ -83,7 +83,7 @@ impl RealNewUser {
 #[derive(Serialize, Deserialize, Debug, Insertable)]
 #[table_name = "users"]
 pub struct NewUser {
-    username: String,
+    pub username: String,
     password: String,
 }
 
