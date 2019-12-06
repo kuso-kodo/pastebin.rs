@@ -2,7 +2,7 @@ use crate::models::pastes::*;
 use crate::models::users::User;
 use crate::models::uuid::*;
 use crate::utils::response::from_json;
-use crate::utils::RResponse::*;
+use crate::utils::APIResponse::*;
 use crate::utils::Result;
 use crate::ConnPool;
 use serde::{Deserialize, Serialize};

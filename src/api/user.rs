@@ -1,7 +1,7 @@
 use crate::models::users::*;
 use crate::utils::response::from_json;
+use crate::utils::APIResponse::*;
 use crate::utils::Error;
-use crate::utils::RResponse::*;
 use crate::utils::Result;
 use crate::ConnPool;
 use http::status::StatusCode;

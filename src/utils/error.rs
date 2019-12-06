@@ -1,11 +1,11 @@
-use crate::utils::RResponse;
+use crate::utils::APIResponse;
 use http::status::StatusCode;
 use serde::{Deserialize, Serialize};
 use std::fmt;
 use tide::IntoResponse;
 use tide::Response;
 
-pub type Result = RResponse<Response, Error>;
+pub type Result = APIResponse<Response, Error>;
 
 /// The generic Error type in out application.
 ///
