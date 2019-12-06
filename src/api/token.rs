@@ -1,11 +1,11 @@
 use crate::models::api_tokens::*;
 use crate::models::uuid::*;
+use crate::utils::new_api_result;
 use crate::utils::APIResponse::*;
 use crate::utils::Result;
 use crate::ConnPool;
 use serde::{Deserialize, Serialize};
 use tide::*;
-use crate::utils::new_api_result;
 
 #[derive(Serialize, Deserialize)]
 pub struct Token {

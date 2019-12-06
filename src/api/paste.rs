@@ -1,13 +1,13 @@
 use crate::models::pastes::*;
 use crate::models::users::User;
 use crate::models::uuid::*;
+use crate::utils::new_api_result;
 use crate::utils::APIResponse::*;
 use crate::utils::Result;
 use crate::ConnPool;
 use serde::{Deserialize, Serialize};
 use tide::*;
 use uuid::Uuid;
-use crate::utils::new_api_result;
 
 #[derive(Serialize, Deserialize)]
 pub struct PasteRequest {

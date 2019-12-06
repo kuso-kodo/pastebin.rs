@@ -1,10 +1,10 @@
 use crate::utils::APIResponse;
+use crate::utils::APIResult;
 use http::status::StatusCode;
 use serde::{Deserialize, Serialize};
 use std::fmt;
 use tide::IntoResponse;
 use tide::Response;
-use crate::utils::APIResult;
 
 pub type Result = APIResponse<APIResult, Error>;
 
