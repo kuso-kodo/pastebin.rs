@@ -34,10 +34,10 @@ impl NewPaste {
     }
 }
 
-pub async fn get(mut req: Request<ConnPool>) -> Result {
-    let request: PasteRequest = req.body_json().await?;
+pub async fn get(req: Request<ConnPool>) -> Result {
+    let id: String = req.param("id")?;
     let pool = req.state();
-    let paste = Paste::get_paste_by_id(request.paste, &pool).await?;
+    let paste = Paste::get_paste_by_id(PasteID(Uuid::parse_str(&id)?), &pool).await?;
     Valid(new_api_result(&paste))
 }
 

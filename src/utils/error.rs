@@ -78,3 +78,10 @@ impl std::convert::From<!> for Error {
         Self::from_http_status(StatusCode::BAD_REQUEST)
     }
 }
+
+impl std::convert::From<uuid::parser::ParseError> for Error {
+    /// Returns `BAD_REQUEST` to client when an diesel::result::Error occurs.
+    fn from(_: uuid::parser::ParseError) -> Self {
+        Self::from_http_status(StatusCode::BAD_REQUEST)
+    }
+}

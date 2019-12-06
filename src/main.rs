@@ -1,11 +1,14 @@
 #![feature(try_trait)]
 #[macro_use]
 extern crate diesel;
+#[macro_use]
+extern crate lazy_static;
 
 mod api;
 mod models;
 mod schema;
 mod utils;
+mod web;
 
 use async_std;
 use diesel::pg::PgConnection;
@@ -23,7 +26,7 @@ async fn main() -> Result<(), std::io::Error> {
     app.at("/register").post(crate::api::user::register);
     app.at("/login").post(crate::api::user::login);
     app.at("/logout").post(crate::api::token::logout);
-    app.at("/get").post(crate::api::paste::get);
+    app.at("/get/:id").get(crate::web::paste::get);
     app.at("/new").post(crate::api::paste::new);
     app.at("/:username/list").get(crate::api::paste::list);
 

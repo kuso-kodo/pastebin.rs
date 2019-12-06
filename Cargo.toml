@@ -15,6 +15,9 @@ log = "0.4.8"
 dotenv = "0.9.0"
 futures-executor = { version = "0.3.1", features = ["thread-pool"] }
 http = "*"
+lazy_static = "1.4.0"
+handlebars = "2.0.2"
+mime = "0.3.14"
 
 [dependencies.serde_json]
 version = "1.0.41"
