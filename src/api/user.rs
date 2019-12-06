@@ -1,5 +1,4 @@
 use crate::models::users::*;
-use crate::utils::response::from_json;
 use crate::utils::APIResponse::*;
 use crate::utils::Error;
 use crate::utils::Result;
@@ -7,6 +6,7 @@ use crate::ConnPool;
 use http::status::StatusCode;
 use serde::{Deserialize, Serialize};
 use tide::*;
+use crate::utils::new_api_result;
 
 #[derive(Serialize, Deserialize)]
 struct LoginInfo {
@@ -18,7 +18,7 @@ pub async fn register(mut req: Request<ConnPool>) -> Result {
     let new_user: NewUser = req.body_json().await?;
     let pool = req.state();
     match new_user.insert(&pool).await {
-        Ok(result) => Valid(from_json(&result)),
+        Ok(result) => Valid(new_api_result(&result)),
         Err(_) => Invalid(Error::from_http_status(StatusCode::CONFLICT)),
     }
 }
@@ -29,7 +29,7 @@ pub async fn login(mut req: Request<ConnPool>) -> Result {
     let result = User::get_user(login_info.username, &pool).await?;
     if result.password() == login_info.password {
         let token = result.new_token(&pool).await.unwrap();
-        Valid(from_json(&token))
+        Valid(new_api_result(&token))
     } else {
         Invalid(Error::from_http_status(StatusCode::CONFLICT))
     }

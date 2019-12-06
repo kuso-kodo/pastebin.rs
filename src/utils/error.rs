@@ -4,8 +4,9 @@ use serde::{Deserialize, Serialize};
 use std::fmt;
 use tide::IntoResponse;
 use tide::Response;
+use crate::utils::APIResult;
 
-pub type Result = APIResponse<Response, Error>;
+pub type Result = APIResponse<APIResult, Error>;
 
 /// The generic Error type in out application.
 ///
