@@ -1,5 +1,5 @@
 use super::api_tokens::*;
-use super::uuid::{APITokenID};
+use super::uuid::APITokenID;
 use crate::schema::users;
 use diesel::result::Error;
 use diesel::{AsChangeset, Queryable};
@@ -17,7 +17,6 @@ pub struct User {
 }
 
 impl User {
-
     pub fn username(&self) -> &str {
         &self.username
     }

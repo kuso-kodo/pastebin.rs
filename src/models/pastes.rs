@@ -1,4 +1,4 @@
-use super::uuid::{PasteID};
+use super::uuid::PasteID;
 use crate::schema::pastes;
 use diesel::result::Error;
 use diesel::{AsChangeset, Identifiable, Queryable};
