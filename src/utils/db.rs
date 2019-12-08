@@ -1,7 +1,8 @@
 use diesel::r2d2::ConnectionManager;
 use diesel::Connection;
 use r2d2::{Pool, PooledConnection};
-
+use std::path::{Path, PathBuf};
+use tide_naive_static_files::{serve_static_files, StaticRootDir};
 /// Async connection pool based on
 /// r2d2::Pool.
 #[derive(Clone)]
@@ -10,6 +11,14 @@ where
     T: Connection + 'static,
 {
     connection_pool: Pool<ConnectionManager<T>>,
+}
+
+impl<T> StaticRootDir for ConnectionPool<T> 
+where
+    T: Connection + 'static, {
+    fn root_dir(&self) -> &Path {
+        &Path::new("./")
+    }
 }
 
 #[allow(dead_code)]
