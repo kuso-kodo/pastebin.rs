@@ -1,6 +1,7 @@
 use crate::api::*;
 use crate::utils::APIResponse::*;
 use crate::ConnPool;
+use serde_json::*;
 use tide::*;
 
 use super::HANDLEBARS;
@@ -14,4 +15,13 @@ pub async fn get(req: Request<ConnPool>) -> Response {
         }
         Invalid(_) => Response::new(400).body_string("Error".to_string()),
     }
+}
+
+pub async fn new(_req: Request<ConnPool>) -> Response {
+    let res = Response::new(200).body_string(
+        HANDLEBARS
+            .render("new_paste", &json!({"name": "foo"}))
+            .unwrap(),
+    );
+    res.set_header("Content-Type", "HTML")
 }

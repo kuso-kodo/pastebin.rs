@@ -12,7 +12,7 @@ use diesel::prelude::*;
 pub struct Paste {
     id: PasteID,
     title: Option<String>,
-    lang: i32,
+    lang: String,
     content: String,
     author_name: String,
 }
@@ -22,7 +22,7 @@ impl Paste {
     pub fn new(
         id: PasteID,
         title: Option<String>,
-        lang: i32,
+        lang: String,
         content: String,
         author_name: String,
     ) -> Self {

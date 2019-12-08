@@ -14,7 +14,7 @@ CREATE TABLE api_tokens (
 CREATE TABLE pastes (
     id UUID PRIMARY KEY NOT NULL,
     title TEXT,
-    lang INTEGER NOT NULL,
+    lang TEXT NOT NULL,
     content TEXT NOT NULL,
     author_name TEXT NOT NULL,
 

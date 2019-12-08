@@ -18,7 +18,7 @@ pub struct PasteRequest {
 pub struct NewPaste {
     title: Option<String>,
     content: String,
-    lang: i32,
+    lang: String,
     author_name: Option<String>,
 }
 

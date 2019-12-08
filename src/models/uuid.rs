@@ -65,4 +65,3 @@ macro_rules! uuid_wrapper {
 
 uuid_wrapper!(APITokenID);
 uuid_wrapper!(PasteID);
-uuid_wrapper!(UserID);

@@ -9,7 +9,7 @@ table! {
     pastes (id) {
         id -> Uuid,
         title -> Nullable<Text>,
-        lang -> Int4,
+        lang -> Text,
         content -> Text,
         author_name -> Text,
     }
