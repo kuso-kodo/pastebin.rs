@@ -1,7 +1,7 @@
 table! {
     api_tokens (token) {
         token -> Uuid,
-        user_id -> Uuid,
+        user_name -> Text,
     }
 }
 
@@ -11,19 +11,22 @@ table! {
         title -> Nullable<Text>,
         lang -> Int4,
         content -> Text,
-        author_id -> Uuid,
+        author_name -> Text,
     }
 }
 
 table! {
-    users (id) {
-        id -> Uuid,
+    users (username) {
         username -> Text,
         password -> Text,
     }
 }
 
-joinable!(api_tokens -> users (user_id));
-joinable!(pastes -> users (author_id));
+joinable!(api_tokens -> users (user_name));
+joinable!(pastes -> users (author_name));
 
-allow_tables_to_appear_in_same_query!(api_tokens, pastes, users,);
+allow_tables_to_appear_in_same_query!(
+    api_tokens,
+    pastes,
+    users,
+);

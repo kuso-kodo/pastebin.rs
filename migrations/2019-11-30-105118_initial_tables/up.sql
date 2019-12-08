@@ -1,15 +1,14 @@
 -- users table
 CREATE TABLE users (
-    id UUID PRIMARY KEY NOT NULL,
-    username TEXT NOT NULL UNIQUE,
+    username TEXT PRIMARY KEY NOT NULL UNIQUE,
     password TEXT NOT NULL
 );
 
 CREATE TABLE api_tokens (
     token UUID PRIMARY KEY NOT NULL,
-    user_id UUID NOT NULL,
+    user_name TEXT NOT NULL,
 
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_name) REFERENCES users(username) ON DELETE CASCADE
 );
 
 CREATE TABLE pastes (
@@ -17,9 +16,9 @@ CREATE TABLE pastes (
     title TEXT,
     lang INTEGER NOT NULL,
     content TEXT NOT NULL,
-    author_id UUID NOT NULL,
+    author_name TEXT NOT NULL,
 
-    FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (author_name) REFERENCES users(username) ON DELETE CASCADE
 );
 
-INSERT INTO users VALUES ('00000000-0000-0000-0000-000000000000', 'Anonymous', ' ');
+INSERT INTO users VALUES ('Anonymous', ' ');

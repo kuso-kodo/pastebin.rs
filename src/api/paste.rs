@@ -19,7 +19,7 @@ pub struct NewPaste {
     title: Option<String>,
     content: String,
     lang: i32,
-    author_id: Option<UserID>,
+    author_name: Option<String>,
 }
 
 impl NewPaste {
@@ -29,7 +29,7 @@ impl NewPaste {
             self.title,
             self.lang,
             self.content,
-            self.author_id.unwrap_or_else(|| UserID(Uuid::nil())),
+            self.author_name.unwrap_or_else(|| "Anonymous".to_string()),
         )
     }
 }
@@ -45,7 +45,7 @@ pub async fn list(req: Request<ConnPool>) -> Result {
     let username: String = req.param("username")?;
     let pool = req.state();
     let user_id = User::get_user(username, &pool).await?;
-    let pastes = Paste::get_paste_list_by_user_id(user_id.id(), &pool).await?;
+    let pastes = Paste::get_paste_list_by_user_name(user_id.username().to_string(), &pool).await?;
     Valid(new_api_result(&pastes))
 }
 

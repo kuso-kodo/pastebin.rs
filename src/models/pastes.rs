@@ -1,4 +1,4 @@
-use super::uuid::{PasteID, UserID};
+use super::uuid::{PasteID};
 use crate::schema::pastes;
 use diesel::result::Error;
 use diesel::{AsChangeset, Identifiable, Queryable};
@@ -14,7 +14,7 @@ pub struct Paste {
     title: Option<String>,
     lang: i32,
     content: String,
-    author_id: UserID,
+    author_name: String,
 }
 
 impl Paste {
@@ -24,14 +24,14 @@ impl Paste {
         title: Option<String>,
         lang: i32,
         content: String,
-        author_id: UserID,
+        author_name: String,
     ) -> Self {
         Paste {
             id,
             title,
             lang,
             content,
-            author_id,
+            author_name,
         }
     }
 
@@ -62,8 +62,8 @@ impl Paste {
         self.content = content
     }
 
-    pub fn author_id(&self) -> UserID {
-        self.author_id
+    pub fn author_name(&self) -> &str {
+        &self.author_name
     }
 
     /// Get a paste instance by its ID.
@@ -74,12 +74,12 @@ impl Paste {
     }
 
     /// Get all pastes by the user iD.
-    pub async fn get_paste_list_by_user_id(
-        p_id: UserID,
+    pub async fn get_paste_list_by_user_name(
+        p_name: String,
         pool: &ConnPool,
     ) -> Result<Vec<Self>, Error> {
         use crate::schema::pastes::dsl::*;
-        pool.run(move |conn| pastes.filter(author_id.eq(&p_id)).load(&conn))
+        pool.run(move |conn| pastes.filter(author_name.eq(&p_name)).load(&conn))
             .await
     }
 

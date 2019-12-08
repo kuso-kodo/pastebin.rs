@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{#if title}}
+        <title> {{title}} - Pastebin </title>
+        {{else}}
+        <title> Untitled paste - Pastebin </title>
+        {{/if}}
+        <link href="https://bootswatch.com/4/flatly/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/sticky-footer-navbar.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    </head>
+
+    <body style="padding-top: 60px">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
+        <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+            <div class="container">
+                <span class="navbar-brand mb-0 h1">Pastebin.rs</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="page-header" id="banner">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7 col-sm-6">
+                        <h1>
+                            {{#if title}}
+                            {{title}}
+                            {{else}}
+                            Untitled
+                            {{/if}}
+                        </h1>
+                        <p class="lead">by {{author_name}}</p>
+                    </div>
+                </div>
+            </div>
+            <pre class="line-numbers"><code class="language-clike">{{content}}</code></pre>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">Copyright 2019 name1e5s.</span>
+            </div>
+        </footer>
+    </body>
+    
+</html>

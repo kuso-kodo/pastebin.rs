@@ -18,6 +18,7 @@ http = "*"
 lazy_static = "1.4.0"
 handlebars = "2.0.2"
 mime = "0.3.14"
+tide-naive-static-files = "1.0.0"
 
 [dependencies.serde_json]
 version = "1.0.41"

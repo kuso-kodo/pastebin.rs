@@ -1,6 +1,4 @@
-use super::users::User;
 use super::uuid::APITokenID;
-use super::uuid::UserID;
 use crate::schema::api_tokens;
 use diesel::result::Error;
 use diesel::{Identifiable, Insertable, Queryable};
@@ -12,10 +10,9 @@ use diesel::prelude::*;
 #[derive(Debug, Serialize, Identifiable, Queryable, Associations, Insertable)]
 #[table_name = "api_tokens"]
 #[primary_key(token)]
-#[belongs_to(User)]
 pub struct APIToken {
     token: APITokenID,
-    user_id: UserID,
+    user_name: String,
 }
 
 impl APIToken {
@@ -46,13 +43,13 @@ impl APIToken {
 #[table_name = "api_tokens"]
 pub struct NewApiToken {
     token: APITokenID,
-    user_id: UserID,
+    user_name: String,
 }
 
 impl NewApiToken {
     /// Construct a new api token.
-    pub fn new(token: APITokenID, user_id: UserID) -> Self {
-        NewApiToken { token, user_id }
+    pub fn new(token: APITokenID, user_name: String) -> Self {
+        NewApiToken { token, user_name }
     }
 
     /// Insert our new api toke into database.
