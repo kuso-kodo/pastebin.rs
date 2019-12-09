@@ -9,31 +9,17 @@
         <title> Untitled paste - Pastebin </title>
         {{/if}}
         <link href="https://bootswatch.com/4/flatly/bootstrap.css" rel="stylesheet" media="screen">
-        <link rel="stylesheet" href="../../static/custom.css">
+        <link rel="stylesheet" href="/static/custom.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.css" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
     </head>
 
-    <body>
-        <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-            <div class="container">
-                <a href="../" class="navbar-brand">Pastebin.rs</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                            <li class="nav-item">
-                                <a class="nav-link text-center" href="#">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-center" href="#">Register</a>
-                            </li>
-                        </ul>
-                </div>
-            </div>
-        </div>
+ <body> 
+  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary"> 
+   <div class="container"> 
+    <a href="./" class="navbar-brand">Pastebin.rs</a> 
+   </div> 
+  </div> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
@@ -55,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <pre class="line-numbers"><code class="language-clike">{{content}}</code></pre>
+            <pre class="line-numbers"><code class="{{lang}}">{{content}}</code></pre>
         </div>
     </body>
     

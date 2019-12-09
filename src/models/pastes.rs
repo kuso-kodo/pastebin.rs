@@ -2,12 +2,12 @@ use super::uuid::PasteID;
 use crate::schema::pastes;
 use diesel::result::Error;
 use diesel::{AsChangeset, Identifiable, Queryable};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 use crate::ConnPool;
 use diesel::prelude::*;
 
-#[derive(Debug, Serialize, AsChangeset, Identifiable, Queryable, Insertable)]
+#[derive(Debug, Serialize, Deserialize, AsChangeset, Identifiable, Queryable, Insertable)]
 #[table_name = "pastes"]
 pub struct Paste {
     id: PasteID,

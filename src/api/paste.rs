@@ -22,6 +22,12 @@ pub struct NewPaste {
     author_name: Option<String>,
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct PasteList {
+    author: String,
+    list: Vec<Paste>,
+}
+
 impl NewPaste {
     fn into(self) -> Paste {
         Paste::new(
@@ -46,7 +52,12 @@ pub async fn list(req: Request<ConnPool>) -> Result {
     let pool = req.state();
     let user_id = User::get_user(username, &pool).await?;
     let pastes = Paste::get_paste_list_by_user_name(user_id.username().to_string(), &pool).await?;
-    Valid(new_api_result(&pastes))
+    let username: String = req.param("username")?;
+    let paste_list = PasteList {
+        author: username,
+        list: pastes,
+    };
+    Valid(new_api_result(&paste_list))
 }
 
 pub async fn new(mut req: Request<ConnPool>) -> Result {

@@ -10,7 +10,7 @@ pub async fn get(req: Request<ConnPool>) -> Response {
     match paste::get(req).await {
         Valid(v) => {
             let data = v.data;
-            let res = Response::new(200).body_string(HANDLEBARS.render("paste", &data).unwrap());
+            let res = Response::new(200).body_string(HANDLEBARS.render("show", &data).unwrap());
             res.set_header("Content-Type", "HTML")
         }
         Invalid(_) => Response::new(400).body_string("Error".to_string()),
@@ -18,10 +18,18 @@ pub async fn get(req: Request<ConnPool>) -> Response {
 }
 
 pub async fn new(_req: Request<ConnPool>) -> Response {
-    let res = Response::new(200).body_string(
-        HANDLEBARS
-            .render("new_paste", &json!({"name": "foo"}))
-            .unwrap(),
-    );
+    let res =
+        Response::new(200).body_string(HANDLEBARS.render("new", &json!({"name": "foo"})).unwrap());
     res.set_header("Content-Type", "HTML")
+}
+
+pub async fn list(req: Request<ConnPool>) -> Response {
+    match paste::list(req).await {
+        Valid(v) => {
+            let data = v.data;
+            let res = Response::new(200).body_string(HANDLEBARS.render("list", &data).unwrap());
+            res.set_header("Content-Type", "HTML")
+        }
+        Invalid(_) => Response::new(400).body_string("Error".to_string()),
+    }
 }
