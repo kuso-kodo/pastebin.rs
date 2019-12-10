@@ -4,8 +4,7 @@ use r2d2::{Pool, PooledConnection};
 use std::path::Path;
 use tide_naive_static_files::StaticRootDir;
 
-/// Async connection pool based on
-/// r2d2::Pool.
+/// Async connection pool based on r2d2::Pool.
 #[derive(Clone)]
 pub struct ConnectionPool<T>
 where
@@ -38,6 +37,7 @@ where
         ConnectionPool { connection_pool }
     }
 
+    /// Run a function on the connection pool.
     pub async fn run<F, R>(&self, f: F) -> R
     where
         F: FnOnce(PooledConnection<ConnectionManager<T>>) -> R

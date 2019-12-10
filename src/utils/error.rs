@@ -43,8 +43,8 @@ impl Error {
     }
 }
 
+/// Convert the Error value into a `Response`.
 impl IntoResponse for Error {
-    /// Convert the Error value into a `Response`.
     fn into_response(self) -> Response {
         Response::new(self.error_status)
             .body_json(&self.error_info)
@@ -58,29 +58,29 @@ impl fmt::Debug for Error {
     }
 }
 
+/// Returns `BAD_REQUEST` to client when an io::Error occurs.
 impl std::convert::From<std::io::Error> for Error {
-    /// Returns `BAD_REQUEST` to client when an io::Error occurs.
     fn from(_: std::io::Error) -> Self {
         Self::from_http_status(StatusCode::BAD_REQUEST)
     }
 }
 
+/// Returns `INTERNAL_ERROR` to client when an diesel::result::Error occurs.
 impl std::convert::From<diesel::result::Error> for Error {
-    /// Returns `INTERNAL_ERROR` to client when an diesel::result::Error occurs.
     fn from(_: diesel::result::Error) -> Self {
         Self::internal_error()
     }
 }
 
+/// Returns `BAD_REQUEST` to client when an diesel::result::Error occurs.
 impl std::convert::From<!> for Error {
-    /// Returns `BAD_REQUEST` to client when an diesel::result::Error occurs.
     fn from(_: !) -> Self {
         Self::from_http_status(StatusCode::BAD_REQUEST)
     }
 }
 
+/// Returns `BAD_REQUEST` to client when an diesel::result::Error occurs.
 impl std::convert::From<uuid::parser::ParseError> for Error {
-    /// Returns `BAD_REQUEST` to client when an diesel::result::Error occurs.
     fn from(_: uuid::parser::ParseError) -> Self {
         Self::from_http_status(StatusCode::BAD_REQUEST)
     }

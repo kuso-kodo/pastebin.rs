@@ -9,8 +9,8 @@ pub enum APIResponse<T, E> {
     Invalid(E),
 }
 
+/// Convert a `APIResponse` type into `tide::Response`.
 impl<T: IntoResponse, E: IntoResponse> IntoResponse for APIResponse<T, E> {
-    /// Convert a `APIResponse` type into `tide::Response`.
     fn into_response(self) -> Response {
         match self {
             APIResponse::Valid(r) => r.into_response(),
@@ -19,8 +19,8 @@ impl<T: IntoResponse, E: IntoResponse> IntoResponse for APIResponse<T, E> {
     }
 }
 
-// Implements the unstable `try_trait`.
-// Hence nightly version of rust is needed for now.
+/// Implements the unstable `try_trait`.
+/// Nightly version of rust is needed for this Trait.
 impl<T, E> Try for APIResponse<T, E> {
     type Ok = T;
     type Error = E;
@@ -38,8 +38,8 @@ impl<T, E> Try for APIResponse<T, E> {
     }
 }
 
+/// Convert `std::result` into out `APIResponse`.
 impl<T, E> From<std::result::Result<T, E>> for APIResponse<T, E> {
-    /// Convert `std::result` into out `APIResponse`.
     fn from(res: std::result::Result<T, E>) -> Self {
         match res {
             Ok(v) => APIResponse::Valid(v),

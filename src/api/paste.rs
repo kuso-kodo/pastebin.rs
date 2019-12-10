@@ -9,6 +9,7 @@ use ::uuid::Uuid;
 use http_service::Body;
 use serde::{Deserialize, Serialize};
 use tide::*;
+
 #[derive(Serialize, Deserialize)]
 pub struct PasteRequest {
     paste: PasteID,
