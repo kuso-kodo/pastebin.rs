@@ -1,10 +1,10 @@
 function submitPaste() {
-    if(pasteForm.codeText.value === "") {
+    if (pasteForm.codeText.value === "") {
         return;
     }
     data = {};
 
-    if(pasteForm.anonymousSwitch.checked) {
+    if (pasteForm.anonymousSwitch.checked) {
         data['author_name'] = 'Anonymous';
     } else {
         if (document.cookie.split(';').filter((item) => item.trim().startsWith('token=')).length) {
@@ -18,7 +18,7 @@ function submitPaste() {
 
     data['content'] = pasteForm.codeText.value;
     data['lang'] = pasteForm.languageSelect.value;
-    if(pasteForm.titleInput.value == "") {
+    if (pasteForm.titleInput.value == "") {
         data['title'] = null;
     } else {
         data['title'] = pasteForm.titleInput.value;
@@ -28,10 +28,10 @@ function submitPaste() {
     xmlhttp.open("POST", "/api/new");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(data));
-    xmlhttp.onload  = function() {
+    xmlhttp.onload = function () {
         var jsonResponse = JSON.parse(xmlhttp.response);
         window.location.href = "/paste/" + jsonResponse['id'];
-     };
+    };
 }
 
 function loginUser() {
@@ -43,7 +43,7 @@ function loginUser() {
     xmlhttp.open("POST", "/api/login");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(data));
-    xmlhttp.onload  = function() {
+    xmlhttp.onload = function () {
         if (xmlhttp.status == 200) {
             var jsonResponse = JSON.parse(xmlhttp.response);
             document.cookie = "username=" + jsonResponse["user_name"];
@@ -54,7 +54,7 @@ function loginUser() {
         } else {
             loginForm.password.classList.add('is-invalid');
         }
-     };
+    };
 }
 
 function registerUser() {
@@ -66,13 +66,13 @@ function registerUser() {
     xmlhttp.open("POST", "/api/register");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(data));
-    xmlhttp.onload  = function() {
+    xmlhttp.onload = function () {
         if (xmlhttp.status == 200) {
             $("#registerModal .close").click();
         } else {
             registerForm.username.classList.add('is-invalid');
         }
-     };
+    };
 }
 
 function logoutUser() {
@@ -82,7 +82,7 @@ function logoutUser() {
     xmlhttp.open("POST", "/api/logout");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(data));
-    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+    document.cookie.split(";").forEach(function (c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
     location.reload()
 }
 
@@ -102,28 +102,28 @@ function setNavBar() {
 }
 
 function updateSubmitButtonState() {
-    if(document.getElementById("codeText").value==="") { 
-           document.getElementById('submitButton').disabled = true; 
-    } else { 
-           document.getElementById('submitButton').disabled = false;
+    if (document.getElementById("codeText").value === "") {
+        document.getElementById('submitButton').disabled = true;
+    } else {
+        document.getElementById('submitButton').disabled = false;
     }
 }
 
-  $(function(){
-    $('#registerModal').keypress(function(e){
-      if(e.which == 13) {
-        registerUser(); 
-      }
+$(function () {
+    $('#registerModal').keypress(function (e) {
+        if (e.which == 13) {
+            registerUser();
+        }
     })
-  })
+})
 
 
-  $(function(){
-    $('#loginModal').keypress(function(e){
-      if(e.which == 13) {
-        loginUser(); 
-      }
+$(function () {
+    $('#loginModal').keypress(function (e) {
+        if (e.which == 13) {
+            loginUser();
+        }
     })
-  })
+})
 
 window.onload = setNavBar

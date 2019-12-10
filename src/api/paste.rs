@@ -1,17 +1,17 @@
+use super::DOMAIN;
+use super::PASTE_DIR;
 use crate::models::pastes::*;
 use crate::models::users::User;
 use crate::models::uuid::*;
 use crate::utils::new_api_result;
-use crate::utils::APIResponse::*;
 use crate::utils::APIResponse;
+use crate::utils::APIResponse::*;
 use crate::utils::Result;
 use crate::ConnPool;
+use http_service::Body;
 use serde::{Deserialize, Serialize};
 use tide::*;
 use uuid::Uuid;
-use http_service::Body;
-use super::DOMAIN;
-use super::PASTE_DIR;
 #[derive(Serialize, Deserialize)]
 pub struct PasteRequest {
     paste: PasteID,
@@ -70,24 +70,28 @@ pub async fn new(mut req: Request<ConnPool>) -> Result {
     Valid(new_api_result(&paste))
 }
 
-pub struct PngFile{
-    data: Vec<u8>
+pub struct PngFile {
+    data: Vec<u8>,
 }
 
 impl IntoResponse for PngFile {
     /// Convert a `APIResponse` type into `tide::Response`.
     fn into_response(self) -> Response {
-        Response::new(200).set_header("Content-Type", "image/png").body(Body::from(self.data))
+        Response::new(200)
+            .set_header("Content-Type", "image/png")
+            .body(Body::from(self.data))
     }
 }
 
-pub async fn get_qrcode(req: Request<ConnPool>) -> APIResponse<PngFile, crate::utils::error::Error> {
+pub async fn get_qrcode(
+    req: Request<ConnPool>,
+) -> APIResponse<PngFile, crate::utils::error::Error> {
     extern crate qrcode_generator;
     use qrcode_generator::QrCodeEcc;
     let mut s: String = req.param("id")?;
     let length = s.len();
     s.truncate(length - 4);
-    let s = format!("{}{}{}", *DOMAIN, *PASTE_DIR,s);
+    let s = format!("{}{}{}", *DOMAIN, *PASTE_DIR, s);
     let data: Vec<u8> = qrcode_generator::to_png_to_vec(s, QrCodeEcc::Low, 1024).unwrap();
     Valid(PngFile { data })
 }

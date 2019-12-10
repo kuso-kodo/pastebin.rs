@@ -45,7 +45,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-        <script src="/static/show.js"></script>
+    <script src="https://clipboardjs.com/dist/clipboard.min.js"></script>
+    <script src="/static/show.js"></script>
+    <script>
+        new ClipboardJS('.btn');
+    </script>
     <div class="container">
         <div class="page-header" id="banner">
             <div class="row">
@@ -68,7 +72,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="shareModalLabel">Login</h5>
+                    <h5 class="modal-title" id="shareModalLabel">Share this Paste via ...</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -78,11 +82,12 @@
                         <div class="card-header">QR Code</div>
                         <div class="card-body">
                             <div class="text-center">
-                                <img style="height: 200px; width: 200px;" src="/api/qr/{{id}}.png" class="img-fluid" alt="QR Code">
+                                <img style="height: 200px; width: 200px;" src="/api/qr/{{id}}.png" class="img-fluid"
+                                    alt="QR Code">
                             </div>
                             <div class="text-center">
                                 <p class="card-text">
-                                Tap and hold on the image to save.
+                                    Tap and hold on the image to save.
                                 </p>
                             </div>
                         </div>
@@ -90,16 +95,17 @@
                     <div class="card border-primary mb-3 mx-auto">
                         <div class="card-header">Link</div>
                         <div class="card-body">
-                            <form class="form-inline">
-                                <input class="form-control" style="width: 75%;" type="text" value="" id="currentLink">
-                                <button class="btn btn-secondary" type="submit">Copy</button>
-                            </form>
+                            <div class="row mx-auto" style="width: 90%;">
+                                <input class="form-control col-lg-9" type="text" value="" id="currentLink"
+                                    spellcheck="false">
+                                <button class="btn btn-secondary col-lg-3"
+                                    data-clipboard-target="#currentLink">Copy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="loginUser()">Login</button>
                 </div>
             </div>
         </div>

@@ -39,6 +39,6 @@ async fn main() -> Result<(), std::io::Error> {
     app.at("/user/:username").get(crate::web::paste::list);
     app.at("/paste/:id").get(crate::web::paste::get);
 
-    app.listen("127.0.0.1:8080").await?;
+    app.listen("0.0.0.0:8080").await?;
     Ok(())
 }
