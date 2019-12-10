@@ -8,7 +8,7 @@ function submitPaste() {
             author_name = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
             data['author_name'] = author_name;
         } else {
-            alert("Login before use real name.");
+            linkA.click();
             return;
         }
     }
