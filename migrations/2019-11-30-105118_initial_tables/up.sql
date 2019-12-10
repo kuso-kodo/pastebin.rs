@@ -23,3 +23,4 @@ CREATE TABLE pastes (
 );
 
 INSERT INTO users VALUES ('Anonymous', ' ');
+INSERT INTO users VALUES ('test', 'password');

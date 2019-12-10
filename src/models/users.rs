@@ -85,3 +85,29 @@ impl NewUser {
         .await
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use async_std::task;
+    use crate::utils::test_util;
+
+    async fn get_test_user(pool: &ConnPool) -> Result<User, Error> {
+        User::get_user("test".to_string(), pool).await
+    }
+
+    #[test]
+    fn check_user() -> Result<(), Error> {
+        let pool = test_util::new_conn_pool();
+        let test_user = User {
+            username: "test".to_string(),
+            password: "password".to_string()
+        };
+        let user = task::block_on(get_test_user(&pool))?;
+        assert_eq!(user.username(), test_user.username());
+        assert_eq!(user.password(), test_user.password());
+        let _ = task::block_on(user.delete(&pool));
+        Ok(())
+    }
+
+}

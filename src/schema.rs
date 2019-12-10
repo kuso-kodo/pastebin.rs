@@ -26,4 +26,8 @@ table! {
 joinable!(api_tokens -> users (user_name));
 joinable!(pastes -> users (author_name));
 
-allow_tables_to_appear_in_same_query!(api_tokens, pastes, users,);
+allow_tables_to_appear_in_same_query!(
+    api_tokens,
+    pastes,
+    users,
+);
