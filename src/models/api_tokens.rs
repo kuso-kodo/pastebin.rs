@@ -1,11 +1,10 @@
 use super::uuid::APITokenID;
 use crate::schema::api_tokens;
+use crate::ConnPool;
+use diesel::prelude::*;
 use diesel::result::Error;
 use diesel::{Identifiable, Insertable, Queryable};
 use serde::Serialize;
-
-use crate::ConnPool;
-use diesel::prelude::*;
 
 #[derive(Debug, Serialize, Identifiable, Queryable, Associations, Insertable)]
 #[table_name = "api_tokens"]

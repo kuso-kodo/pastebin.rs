@@ -1,8 +1,8 @@
-use crate::models::users::*;
-use crate::utils::new_api_result;
+use crate::models::*;
 use crate::utils::APIResponse::*;
 use crate::utils::Error;
 use crate::utils::Result;
+use crate::utils::*;
 use crate::ConnPool;
 use http::status::StatusCode;
 use serde::{Deserialize, Serialize};

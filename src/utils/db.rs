@@ -3,6 +3,7 @@ use diesel::Connection;
 use r2d2::{Pool, PooledConnection};
 use std::path::Path;
 use tide_naive_static_files::StaticRootDir;
+
 /// Async connection pool based on
 /// r2d2::Pool.
 #[derive(Clone)]

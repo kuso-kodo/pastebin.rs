@@ -1,13 +1,12 @@
 use super::uuid::PasteID;
 use crate::schema::pastes;
+use crate::ConnPool;
 use chrono;
 use chrono::SubsecRound;
+use diesel::prelude::*;
 use diesel::result::Error;
 use diesel::{AsChangeset, Identifiable, Queryable};
 use serde::{Deserialize, Serialize};
-
-use crate::ConnPool;
-use diesel::prelude::*;
 
 #[derive(Debug, Serialize, Deserialize, AsChangeset, Identifiable, Queryable, Insertable)]
 #[table_name = "pastes"]

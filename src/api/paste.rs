@@ -1,17 +1,14 @@
 use super::DOMAIN;
 use super::PASTE_DIR;
-use crate::models::pastes::*;
-use crate::models::users::User;
-use crate::models::uuid::*;
-use crate::utils::new_api_result;
-use crate::utils::APIResponse;
+use crate::models::*;
 use crate::utils::APIResponse::*;
 use crate::utils::Result;
+use crate::utils::*;
 use crate::ConnPool;
+use ::uuid::Uuid;
 use http_service::Body;
 use serde::{Deserialize, Serialize};
 use tide::*;
-use uuid::Uuid;
 #[derive(Serialize, Deserialize)]
 pub struct PasteRequest {
     paste: PasteID,

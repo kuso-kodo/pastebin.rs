@@ -1,13 +1,12 @@
 use super::api_tokens::*;
 use super::uuid::APITokenID;
 use crate::schema::users;
+use crate::ConnPool;
+use diesel::prelude::*;
 use diesel::result::Error;
 use diesel::{AsChangeset, Queryable};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
-
-use crate::ConnPool;
-use diesel::prelude::*;
 
 #[derive(Debug, Serialize, AsChangeset, Queryable)]
 pub struct User {
