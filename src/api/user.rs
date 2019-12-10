@@ -4,7 +4,7 @@ use crate::utils::Error;
 use crate::utils::Result;
 use crate::utils::*;
 use crate::ConnPool;
-use http::status::StatusCode;
+use ::http::status::StatusCode;
 use serde::{Deserialize, Serialize};
 use tide::*;
 
