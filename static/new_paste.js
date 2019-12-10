@@ -1,4 +1,7 @@
 function submitPaste() {
+    if(pasteForm.codeText.value === "") {
+        return;
+    }
     data = {};
 
     if(pasteForm.anonymousSwitch.checked) {
@@ -95,6 +98,14 @@ function setNavBar() {
         linkB.removeAttribute('data-target');
         linkB.innerText = "Logout";
         linkB.setAttribute("onclick", "logoutUser()");
+    }
+}
+
+function updateSubmitButtonState() {
+    if(document.getElementById("codeText").value==="") { 
+           document.getElementById('submitButton').disabled = true; 
+    } else { 
+           document.getElementById('submitButton').disabled = false;
     }
 }
 

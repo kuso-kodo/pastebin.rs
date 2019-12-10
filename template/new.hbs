@@ -1,323 +1,342 @@
 <!DOCTYPE html>
 <html>
- <head> 
-  <meta charset="utf-8" /> 
-  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-  <title> New paste - Pastebin </title> 
-  <link href="https://bootswatch.com/4/pulse/bootstrap.css" rel="stylesheet" media="screen" /> 
-  <link rel="stylesheet" href="/static/custom.css" /> 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.css" rel="stylesheet" /> 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" /> 
- </head> 
- <body> 
-  <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary"> 
-   <div class="container"> 
-    <a href="/" class="navbar-brand">Pastebin.rs</a> 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button> 
-    <div class="collapse navbar-collapse" id="navbarColor01"> 
-     <ul class="nav navbar-nav ml-auto w-100 justify-content-end"> 
-      <li class="nav-item"> <a class="nav-link text-center" href="#loginModal" data-toggle = "modal" data-target= "#loginModal" id="linkA">Login</a> </li> 
-      <li class="nav-item"> <a class="nav-link text-center" href="#registerModal" data-toggle = "modal" data-target= "#registerModal" id="linkB">Register</a> </li> 
-     </ul> 
-    </div> 
-   </div> 
-  </div> 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script> 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script> 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.js"></script> 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> 
-  <script src="/static/new_paste.js"></script>
-  <div class="container"> 
-   <form id="pasteForm"> 
-    <fieldset> 
-     <div class="form-group"> 
-      <label for="codeText">Code</label> 
-      <textarea class="form-control" id="codeText" rows="15" spellcheck="false"></textarea> 
-     </div>
-     <div class="form-row">
-            <div class="form-group col-md-6"> 
-                <label for="titleInput">Title</label> 
-                <input class="form-control" id="titleInput" placeholder="Enter title here." spellcheck="false"/> 
-            </div> 
-            <div class="form-group col-md-6"> 
-                <label for="languageSelect">Syntax</label> 
-                <select class="form-control" id="languageSelect">
-                    <option value="language-markup">Markup</option>
-                    <option value="language-css">CSS</option>
-                    <option value="language-clike">C-like</option>
-                    <option value="language-javascript">JavaScript</option>
-                    <option value="language-abap">ABAP</option>
-                    <option value="language-abnf">Augmented Backus–Naur form</option>
-                    <option value="language-actionscript">ActionScript</option>
-                    <option value="language-ada">Ada</option>
-                    <option value="language-antlr4">ANTLR4</option>
-                    <option value="language-apacheconf">Apache Configuration</option>
-                    <option value="language-apl">APL</option>
-                    <option value="language-applescript">AppleScript</option>
-                    <option value="language-aql">AQL</option>
-                    <option value="language-arduino">Arduino</option>
-                    <option value="language-arff">ARFF</option>
-                    <option value="language-asciidoc">AsciiDoc</option>
-                    <option value="language-asm6502">6502 Assembly</option>
-                    <option value="language-aspnet">ASP.NET (C#)</option>
-                    <option value="language-autohotkey">AutoHotkey</option>
-                    <option value="language-autoit">AutoIt</option>
-                    <option value="language-bash">Bash</option>
-                    <option value="language-basic">BASIC</option>
-                    <option value="language-batch">Batch</option>
-                    <option value="language-bbcode">BBcode</option>
-                    <option value="language-bison">Bison</option>
-                    <option value="language-bnf">Backus–Naur form</option>
-                    <option value="language-brainfuck">Brainfuck</option>
-                    <option value="language-brightscript">BrightScript</option>
-                    <option value="language-bro">Bro</option>
-                    <option value="language-c">C</option>
-                    <option value="language-csharp">C#</option>
-                    <option value="language-cpp">C++</option>
-                    <option value="language-cil">CIL</option>
-                    <option value="language-coffeescript">CoffeeScript</option>
-                    <option value="language-cmake">CMake</option>
-                    <option value="language-clojure">Clojure</option>
-                    <option value="language-crystal">Crystal</option>
-                    <option value="language-csp">Content-Security-Policy</option>
-                    <option value="language-css-extras">CSS Extras</option>
-                    <option value="language-d">D</option>
-                    <option value="language-dart">Dart</option>
-                    <option value="language-diff">Diff</option>
-                    <option value="language-django">Django/Jinja2</option>
-                    <option value="language-dns-zone-file">DNS zone file</option>
-                    <option value="language-docker">Docker</option>
-                    <option value="language-ebnf">Extended Backus–Naur form</option>
-                    <option value="language-eiffel">Eiffel</option>
-                    <option value="language-ejs">EJS</option>
-                    <option value="language-elixir">Elixir</option>
-                    <option value="language-elm">Elm</option>
-                    <option value="language-etlua">Embedded Lua templating</option>
-                    <option value="language-erb">ERB</option>
-                    <option value="language-erlang">Erlang</option>
-                    <option value="language-fsharp">F#</option>
-                    <option value="language-firestore-security-rules">Firestore security rules</option>
-                    <option value="language-flow">Flow</option>
-                    <option value="language-fortran">Fortran</option>
-                    <option value="language-ftl">FreeMarker Template Language</option>
-                    <option value="language-gcode">G-code</option>
-                    <option value="language-gdscript">GDScript</option>
-                    <option value="language-gedcom">GEDCOM</option>
-                    <option value="language-gherkin">Gherkin</option>
-                    <option value="language-git">Git</option>
-                    <option value="language-glsl">GLSL</option>
-                    <option value="language-gml">GameMaker Language</option>
-                    <option value="language-go">Go</option>
-                    <option value="language-graphql">GraphQL</option>
-                    <option value="language-groovy">Groovy</option>
-                    <option value="language-haml">Haml</option>
-                    <option value="language-handlebars">Handlebars</option>
-                    <option value="language-haskell">Haskell</option>
-                    <option value="language-haxe">Haxe</option>
-                    <option value="language-hcl">HCL</option>
-                    <option value="language-http">HTTP</option>
-                    <option value="language-hpkp">HTTP Public-Key-Pins</option>
-                    <option value="language-hsts">HTTP Strict-Transport-Security</option>
-                    <option value="language-ichigojam">IchigoJam</option>
-                    <option value="language-icon">Icon</option>
-                    <option value="language-inform7">Inform 7</option>
-                    <option value="language-ini">Ini</option>
-                    <option value="language-io">Io</option>
-                    <option value="language-j">J</option>
-                    <option value="language-java">Java</option>
-                    <option value="language-javadoc">JavaDoc</option>
-                    <option value="language-javadoclike">JavaDoc-like</option>
-                    <option value="language-javastacktrace">Java stack trace</option>
-                    <option value="language-jolie">Jolie</option>
-                    <option value="language-jq">JQ</option>
-                    <option value="language-jsdoc">JSDoc</option>
-                    <option value="language-js-extras">JS Extras</option>
-                    <option value="language-js-templates">JS Templates</option>
-                    <option value="language-json">JSON</option>
-                    <option value="language-jsonp">JSONP</option>
-                    <option value="language-json5">JSON5</option>
-                    <option value="language-julia">Julia</option>
-                    <option value="language-keyman">Keyman</option>
-                    <option value="language-kotlin">Kotlin</option>
-                    <option value="language-latex">LaTeX</option>
-                    <option value="language-less">Less</option>
-                    <option value="language-lilypond">LilyPond</option>
-                    <option value="language-liquid">Liquid</option>
-                    <option value="language-lisp">Lisp</option>
-                    <option value="language-livescript">LiveScript</option>
-                    <option value="language-lolcode">LOLCODE</option>
-                    <option value="language-lua">Lua</option>
-                    <option value="language-makefile">Makefile</option>
-                    <option value="language-markdown">Markdown</option>
-                    <option value="language-markup-templating">Markup templating</option>
-                    <option value="language-matlab">MATLAB</option>
-                    <option value="language-mel">MEL</option>
-                    <option value="language-mizar">Mizar</option>
-                    <option value="language-monkey">Monkey</option>
-                    <option value="language-moonscript">MoonScript</option>
-                    <option value="language-n1ql">N1QL</option>
-                    <option value="language-n4js">N4JS</option>
-                    <option value="language-nand2tetris-hdl">Nand To Tetris HDL</option>
-                    <option value="language-nasm">NASM</option>
-                    <option value="language-nginx">nginx</option>
-                    <option value="language-nim">Nim</option>
-                    <option value="language-nix">Nix</option>
-                    <option value="language-nsis">NSIS</option>
-                    <option value="language-objectivec">Objective-C</option>
-                    <option value="language-ocaml">OCaml</option>
-                    <option value="language-opencl">OpenCL</option>
-                    <option value="language-oz">Oz</option>
-                    <option value="language-parigp">PARI/GP</option>
-                    <option value="language-parser">Parser</option>
-                    <option value="language-pascal">Pascal</option>
-                    <option value="language-pascaligo">Pascaligo</option>
-                    <option value="language-pcaxis">PC-Axis</option>
-                    <option value="language-perl">Perl</option>
-                    <option value="language-php">PHP</option>
-                    <option value="language-phpdoc">PHPDoc</option>
-                    <option value="language-php-extras">PHP Extras</option>
-                    <option value="language-plsql">PL/SQL</option>
-                    <option value="language-powershell">PowerShell</option>
-                    <option value="language-processing">Processing</option>
-                    <option value="language-prolog">Prolog</option>
-                    <option value="language-properties">.properties</option>
-                    <option value="language-protobuf">Protocol Buffers</option>
-                    <option value="language-pug">Pug</option>
-                    <option value="language-puppet">Puppet</option>
-                    <option value="language-pure">Pure</option>
-                    <option value="language-python">Python</option>
-                    <option value="language-q">Q (kdb+ database)</option>
-                    <option value="language-qore">Qore</option>
-                    <option value="language-r">R</option>
-                    <option value="language-jsx">React JSX</option>
-                    <option value="language-tsx">React TSX</option>
-                    <option value="language-renpy">Ren'py</option>
-                    <option value="language-reason">Reason</option>
-                    <option value="language-regex">Regex</option>
-                    <option value="language-rest">reST (reStructuredText)</option>
-                    <option value="language-rip">Rip</option>
-                    <option value="language-roboconf">Roboconf</option>
-                    <option value="language-robotframework">Robot Framework</option>
-                    <option value="language-ruby">Ruby</option>
-                    <option value="language-rust">Rust</option>
-                    <option value="language-sas">SAS</option>
-                    <option value="language-sass">Sass (Sass)</option>
-                    <option value="language-scss">Sass (Scss)</option>
-                    <option value="language-scala">Scala</option>
-                    <option value="language-scheme">Scheme</option>
-                    <option value="language-shell-session">Shell session</option>
-                    <option value="language-smalltalk">Smalltalk</option>
-                    <option value="language-smarty">Smarty</option>
-                    <option value="language-solidity">Solidity (Ethereum)</option>
-                    <option value="language-soy">Soy (Closure Template)</option>
-                    <option value="language-sparql">SPARQL</option>
-                    <option value="language-splunk-spl">Splunk SPL</option>
-                    <option value="language-sqf">SQF: Status Quo Function (Arma 3)</option>
-                    <option value="language-sql">SQL</option>
-                    <option value="language-stylus">Stylus</option>
-                    <option value="language-swift">Swift</option>
-                    <option value="language-tap">TAP</option>
-                    <option value="language-tcl">Tcl</option>
-                    <option value="language-textile">Textile</option>
-                    <option value="language-toml">TOML</option>
-                    <option value="language-tt2">Template Toolkit 2</option>
-                    <option value="language-turtle">Turtle</option>
-                    <option value="language-twig">Twig</option>
-                    <option value="language-typescript">TypeScript</option>
-                    <option value="language-t4-cs">T4 Text Templates (C#)</option>
-                    <option value="language-t4-vb">T4 Text Templates (VB)</option>
-                    <option value="language-t4-templating">T4 templating</option>
-                    <option value="language-vala">Vala</option>
-                    <option value="language-vbnet">VB.Net</option>
-                    <option value="language-velocity">Velocity</option>
-                    <option value="language-verilog">Verilog</option>
-                    <option value="language-vhdl">VHDL</option>
-                    <option value="language-vim">vim</option>
-                    <option value="language-visual-basic">Visual Basic</option>
-                    <option value="language-wasm">WebAssembly</option>
-                    <option value="language-wiki">Wiki markup</option>
-                    <option value="language-xeora">Xeora</option>
-                    <option value="language-xojo">Xojo (REALbasic)</option>
-                    <option value="language-xquery">XQuery</option>
-                    <option value="language-yaml">YAML</option>
-                    <option value="language-zig">Zig</option>
-                </select> 
-            </div> 
-     </div>
-    <div class="form-group text-center">
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="anonymousSwitch" checked="">
-            <label class="custom-control-label" for="anonymousSwitch">Use anonymous account?</label>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title> New paste - Pastebin </title>
+    <link href="https://bootswatch.com/4/pulse/bootstrap.css" rel="stylesheet" media="screen" />
+    <link rel="stylesheet" href="/static/custom.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.css"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <div class="container">
+            <a href="/" class="navbar-brand">Pastebin.rs</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"> <span
+                    class="navbar-toggler-icon"></span> </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                    <li class="nav-item"> <a class="nav-link text-center" href="#loginModal" data-toggle="modal"
+                            data-target="#loginModal" id="linkA">Login</a> </li>
+                    <li class="nav-item"> <a class="nav-link text-center" href="#registerModal" data-toggle="modal"
+                            data-target="#registerModal" id="linkB">Register</a> </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary text-center" onclick="submitPaste()">Submit</button> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="/static/new_paste.js"></script>
+    <div class="container">
+        <form id="pasteForm">
+            <fieldset>
+                <div class="form-group">
+                    <label for="codeText">Code</label>
+                    <textarea class="form-control" id="codeText" rows="15" spellcheck="false" onkeyup="updateSubmitButtonState()"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="titleInput">Title</label>
+                        <input class="form-control" id="titleInput" placeholder="Enter title here."
+                            spellcheck="false"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="languageSelect">Syntax</label>
+                        <select class="form-control" id="languageSelect">
+                            <option value="language-markup">Markup</option>
+                            <option value="language-css">CSS</option>
+                            <option value="language-clike">C-like</option>
+                            <option value="language-javascript">JavaScript</option>
+                            <option value="language-abap">ABAP</option>
+                            <option value="language-abnf">Augmented Backus–Naur form</option>
+                            <option value="language-actionscript">ActionScript</option>
+                            <option value="language-ada">Ada</option>
+                            <option value="language-antlr4">ANTLR4</option>
+                            <option value="language-apacheconf">Apache Configuration</option>
+                            <option value="language-apl">APL</option>
+                            <option value="language-applescript">AppleScript</option>
+                            <option value="language-aql">AQL</option>
+                            <option value="language-arduino">Arduino</option>
+                            <option value="language-arff">ARFF</option>
+                            <option value="language-asciidoc">AsciiDoc</option>
+                            <option value="language-asm6502">6502 Assembly</option>
+                            <option value="language-aspnet">ASP.NET (C#)</option>
+                            <option value="language-autohotkey">AutoHotkey</option>
+                            <option value="language-autoit">AutoIt</option>
+                            <option value="language-bash">Bash</option>
+                            <option value="language-basic">BASIC</option>
+                            <option value="language-batch">Batch</option>
+                            <option value="language-bbcode">BBcode</option>
+                            <option value="language-bison">Bison</option>
+                            <option value="language-bnf">Backus–Naur form</option>
+                            <option value="language-brainfuck">Brainfuck</option>
+                            <option value="language-brightscript">BrightScript</option>
+                            <option value="language-bro">Bro</option>
+                            <option value="language-c">C</option>
+                            <option value="language-csharp">C#</option>
+                            <option value="language-cpp">C++</option>
+                            <option value="language-cil">CIL</option>
+                            <option value="language-coffeescript">CoffeeScript</option>
+                            <option value="language-cmake">CMake</option>
+                            <option value="language-clojure">Clojure</option>
+                            <option value="language-crystal">Crystal</option>
+                            <option value="language-csp">Content-Security-Policy</option>
+                            <option value="language-css-extras">CSS Extras</option>
+                            <option value="language-d">D</option>
+                            <option value="language-dart">Dart</option>
+                            <option value="language-diff">Diff</option>
+                            <option value="language-django">Django/Jinja2</option>
+                            <option value="language-dns-zone-file">DNS zone file</option>
+                            <option value="language-docker">Docker</option>
+                            <option value="language-ebnf">Extended Backus–Naur form</option>
+                            <option value="language-eiffel">Eiffel</option>
+                            <option value="language-ejs">EJS</option>
+                            <option value="language-elixir">Elixir</option>
+                            <option value="language-elm">Elm</option>
+                            <option value="language-etlua">Embedded Lua templating</option>
+                            <option value="language-erb">ERB</option>
+                            <option value="language-erlang">Erlang</option>
+                            <option value="language-fsharp">F#</option>
+                            <option value="language-firestore-security-rules">Firestore security rules</option>
+                            <option value="language-flow">Flow</option>
+                            <option value="language-fortran">Fortran</option>
+                            <option value="language-ftl">FreeMarker Template Language</option>
+                            <option value="language-gcode">G-code</option>
+                            <option value="language-gdscript">GDScript</option>
+                            <option value="language-gedcom">GEDCOM</option>
+                            <option value="language-gherkin">Gherkin</option>
+                            <option value="language-git">Git</option>
+                            <option value="language-glsl">GLSL</option>
+                            <option value="language-gml">GameMaker Language</option>
+                            <option value="language-go">Go</option>
+                            <option value="language-graphql">GraphQL</option>
+                            <option value="language-groovy">Groovy</option>
+                            <option value="language-haml">Haml</option>
+                            <option value="language-handlebars">Handlebars</option>
+                            <option value="language-haskell">Haskell</option>
+                            <option value="language-haxe">Haxe</option>
+                            <option value="language-hcl">HCL</option>
+                            <option value="language-http">HTTP</option>
+                            <option value="language-hpkp">HTTP Public-Key-Pins</option>
+                            <option value="language-hsts">HTTP Strict-Transport-Security</option>
+                            <option value="language-ichigojam">IchigoJam</option>
+                            <option value="language-icon">Icon</option>
+                            <option value="language-inform7">Inform 7</option>
+                            <option value="language-ini">Ini</option>
+                            <option value="language-io">Io</option>
+                            <option value="language-j">J</option>
+                            <option value="language-java">Java</option>
+                            <option value="language-javadoc">JavaDoc</option>
+                            <option value="language-javadoclike">JavaDoc-like</option>
+                            <option value="language-javastacktrace">Java stack trace</option>
+                            <option value="language-jolie">Jolie</option>
+                            <option value="language-jq">JQ</option>
+                            <option value="language-jsdoc">JSDoc</option>
+                            <option value="language-js-extras">JS Extras</option>
+                            <option value="language-js-templates">JS Templates</option>
+                            <option value="language-json">JSON</option>
+                            <option value="language-jsonp">JSONP</option>
+                            <option value="language-json5">JSON5</option>
+                            <option value="language-julia">Julia</option>
+                            <option value="language-keyman">Keyman</option>
+                            <option value="language-kotlin">Kotlin</option>
+                            <option value="language-latex">LaTeX</option>
+                            <option value="language-less">Less</option>
+                            <option value="language-lilypond">LilyPond</option>
+                            <option value="language-liquid">Liquid</option>
+                            <option value="language-lisp">Lisp</option>
+                            <option value="language-livescript">LiveScript</option>
+                            <option value="language-lolcode">LOLCODE</option>
+                            <option value="language-lua">Lua</option>
+                            <option value="language-makefile">Makefile</option>
+                            <option value="language-markdown">Markdown</option>
+                            <option value="language-markup-templating">Markup templating</option>
+                            <option value="language-matlab">MATLAB</option>
+                            <option value="language-mel">MEL</option>
+                            <option value="language-mizar">Mizar</option>
+                            <option value="language-monkey">Monkey</option>
+                            <option value="language-moonscript">MoonScript</option>
+                            <option value="language-n1ql">N1QL</option>
+                            <option value="language-n4js">N4JS</option>
+                            <option value="language-nand2tetris-hdl">Nand To Tetris HDL</option>
+                            <option value="language-nasm">NASM</option>
+                            <option value="language-nginx">nginx</option>
+                            <option value="language-nim">Nim</option>
+                            <option value="language-nix">Nix</option>
+                            <option value="language-nsis">NSIS</option>
+                            <option value="language-objectivec">Objective-C</option>
+                            <option value="language-ocaml">OCaml</option>
+                            <option value="language-opencl">OpenCL</option>
+                            <option value="language-oz">Oz</option>
+                            <option value="language-parigp">PARI/GP</option>
+                            <option value="language-parser">Parser</option>
+                            <option value="language-pascal">Pascal</option>
+                            <option value="language-pascaligo">Pascaligo</option>
+                            <option value="language-pcaxis">PC-Axis</option>
+                            <option value="language-perl">Perl</option>
+                            <option value="language-php">PHP</option>
+                            <option value="language-phpdoc">PHPDoc</option>
+                            <option value="language-php-extras">PHP Extras</option>
+                            <option value="language-plsql">PL/SQL</option>
+                            <option value="language-powershell">PowerShell</option>
+                            <option value="language-processing">Processing</option>
+                            <option value="language-prolog">Prolog</option>
+                            <option value="language-properties">.properties</option>
+                            <option value="language-protobuf">Protocol Buffers</option>
+                            <option value="language-pug">Pug</option>
+                            <option value="language-puppet">Puppet</option>
+                            <option value="language-pure">Pure</option>
+                            <option value="language-python">Python</option>
+                            <option value="language-q">Q (kdb+ database)</option>
+                            <option value="language-qore">Qore</option>
+                            <option value="language-r">R</option>
+                            <option value="language-jsx">React JSX</option>
+                            <option value="language-tsx">React TSX</option>
+                            <option value="language-renpy">Ren'py</option>
+                            <option value="language-reason">Reason</option>
+                            <option value="language-regex">Regex</option>
+                            <option value="language-rest">reST (reStructuredText)</option>
+                            <option value="language-rip">Rip</option>
+                            <option value="language-roboconf">Roboconf</option>
+                            <option value="language-robotframework">Robot Framework</option>
+                            <option value="language-ruby">Ruby</option>
+                            <option value="language-rust">Rust</option>
+                            <option value="language-sas">SAS</option>
+                            <option value="language-sass">Sass (Sass)</option>
+                            <option value="language-scss">Sass (Scss)</option>
+                            <option value="language-scala">Scala</option>
+                            <option value="language-scheme">Scheme</option>
+                            <option value="language-shell-session">Shell session</option>
+                            <option value="language-smalltalk">Smalltalk</option>
+                            <option value="language-smarty">Smarty</option>
+                            <option value="language-solidity">Solidity (Ethereum)</option>
+                            <option value="language-soy">Soy (Closure Template)</option>
+                            <option value="language-sparql">SPARQL</option>
+                            <option value="language-splunk-spl">Splunk SPL</option>
+                            <option value="language-sqf">SQF: Status Quo Function (Arma 3)</option>
+                            <option value="language-sql">SQL</option>
+                            <option value="language-stylus">Stylus</option>
+                            <option value="language-swift">Swift</option>
+                            <option value="language-tap">TAP</option>
+                            <option value="language-tcl">Tcl</option>
+                            <option value="language-textile">Textile</option>
+                            <option value="language-toml">TOML</option>
+                            <option value="language-tt2">Template Toolkit 2</option>
+                            <option value="language-turtle">Turtle</option>
+                            <option value="language-twig">Twig</option>
+                            <option value="language-typescript">TypeScript</option>
+                            <option value="language-t4-cs">T4 Text Templates (C#)</option>
+                            <option value="language-t4-vb">T4 Text Templates (VB)</option>
+                            <option value="language-t4-templating">T4 templating</option>
+                            <option value="language-vala">Vala</option>
+                            <option value="language-vbnet">VB.Net</option>
+                            <option value="language-velocity">Velocity</option>
+                            <option value="language-verilog">Verilog</option>
+                            <option value="language-vhdl">VHDL</option>
+                            <option value="language-vim">vim</option>
+                            <option value="language-visual-basic">Visual Basic</option>
+                            <option value="language-wasm">WebAssembly</option>
+                            <option value="language-wiki">Wiki markup</option>
+                            <option value="language-xeora">Xeora</option>
+                            <option value="language-xojo">Xojo (REALbasic)</option>
+                            <option value="language-xquery">XQuery</option>
+                            <option value="language-yaml">YAML</option>
+                            <option value="language-zig">Zig</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="anonymousSwitch" checked="">
+                        <label class="custom-control-label" for="anonymousSwitch">Use anonymous account?</label>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary text-center" onclick="submitPaste()" id="submitButton" disabled="true">Submit</button>
+                </div>
+            </fieldset>
+        </form>
     </div>
-    </fieldset> 
-   </form> 
-  </div>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="loginForm">
-                <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Username:</label>
-                    <input type="text" class="form-control" id="username" spellcheck="false">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="message-text" class="col-form-label">Password:</label>
-                    <input type="password" class="form-control" id="password">
-                    <div class="invalid-feedback">Wrong password.</div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="username" spellcheck="false">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="password">
+                            <div class="invalid-feedback">Wrong password.</div>
+                        </div>
+                    </form>
                 </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="loginUser()">Login</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="loginUser()">Login</button>
+                </div>
             </div>
         </div>
     </div>
 
 
-    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="registerModalLabel">Login</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="registerForm">
-                <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Username:</label>
-                    <input type="text" class="form-control" id="regusername" spellcheck="false">
-                    <div class="invalid-feedback">This username is used by other. Pick another please.</div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="message-text" class="col-form-label">Password:</label>
-                    <input type="text" class="form-control" id="regpassword">
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Username:</label>
+                            <input type="text" class="form-control" id="regusername" spellcheck="false">
+                            <div class="invalid-feedback">This username is used by other. Pick another please.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="text" class="form-control" id="regpassword">
+                        </div>
+                    </form>
                 </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="registerUser()">Register</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="registerUser()">Register</button>
+                </div>
             </div>
         </div>
     </div>
- </body>
+</body>
+
 </html>
