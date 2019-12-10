@@ -31,6 +31,7 @@ async fn main() -> Result<(), std::io::Error> {
     app.at("/api/login").post(crate::api::user::login);
     app.at("/api/logout").post(crate::api::token::logout);
     app.at("/api/new").post(crate::api::paste::new);
+    app.at("/api/qr/:id").get(crate::api::paste::get_qrcode);
     app.at("/api/user/:username").get(crate::api::paste::list);
     app.at("/api/paste/:id").get(crate::web::paste::get);
     // Web Pages
