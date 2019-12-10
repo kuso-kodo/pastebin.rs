@@ -23,15 +23,20 @@ async fn main() -> Result<(), std::io::Error> {
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
     let pool = ConnectionPool::new(&database_url);
     let mut app = tide::with_state(pool);
+    // Static files
     app.at("/static/*")
         .get(|req| async { serve_static_files(req).await.unwrap() });
-    app.at("/register").post(crate::api::user::register);
-    app.at("/login").post(crate::api::user::login);
-    app.at("/logout").post(crate::api::token::logout);
-    app.at("/get/:id").get(crate::web::paste::get);
-    app.at("/new").post(crate::api::paste::new);
+    // APIs
+    app.at("/api/register").post(crate::api::user::register);
+    app.at("/api/login").post(crate::api::user::login);
+    app.at("/api/logout").post(crate::api::token::logout);
+    app.at("/api/new").post(crate::api::paste::new);
+    app.at("/api/user/:username").get(crate::api::paste::list);
+    app.at("/api/paste/:id").get(crate::web::paste::get);
+    // Web Pages
     app.at("/").get(crate::web::paste::new);
-    app.at("/:username/list").get(crate::web::paste::list);
+    app.at("/user/:username").get(crate::web::paste::list);
+    app.at("/paste/:id").get(crate::web::paste::get);
 
     app.listen("127.0.0.1:8080").await?;
     Ok(())

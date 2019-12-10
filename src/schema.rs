@@ -12,6 +12,7 @@ table! {
         lang -> Text,
         content -> Text,
         author_name -> Text,
+        created_at -> Timestamp,
     }
 }
 

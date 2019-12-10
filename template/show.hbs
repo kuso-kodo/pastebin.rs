@@ -8,7 +8,7 @@
         {{else}}
         <title> Untitled paste - Pastebin </title>
         {{/if}}
-        <link href="https://bootswatch.com/4/flatly/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="https://bootswatch.com/4/pulse/bootstrap.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" href="/static/custom.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism.css" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
@@ -17,7 +17,7 @@
  <body> 
   <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary"> 
    <div class="container"> 
-    <a href="./" class="navbar-brand">Pastebin.rs</a> 
+    <a href="/" class="navbar-brand">Pastebin.rs</a> 
    </div> 
   </div> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js"></script>
@@ -37,7 +37,7 @@
                             Untitled
                             {{/if}}
                         </h1>
-                        <p class="lead">by {{author_name}}</p>
+                        <p class="lead">by {{author_name}} at {{created_at}}</p>
                     </div>
                 </div>
             </div>

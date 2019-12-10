@@ -1,5 +1,7 @@
 use super::uuid::PasteID;
 use crate::schema::pastes;
+use chrono;
+use chrono::SubsecRound;
 use diesel::result::Error;
 use diesel::{AsChangeset, Identifiable, Queryable};
 use serde::{Deserialize, Serialize};
@@ -15,6 +17,7 @@ pub struct Paste {
     lang: String,
     content: String,
     author_name: String,
+    created_at: chrono::NaiveDateTime,
 }
 
 impl Paste {
@@ -32,6 +35,7 @@ impl Paste {
             lang,
             content,
             author_name,
+            created_at: chrono::Local::now().round_subsecs(0).naive_local(),
         }
     }
 
@@ -79,8 +83,13 @@ impl Paste {
         pool: &ConnPool,
     ) -> Result<Vec<Self>, Error> {
         use crate::schema::pastes::dsl::*;
-        pool.run(move |conn| pastes.filter(author_name.eq(&p_name)).load(&conn))
-            .await
+        pool.run(move |conn| {
+            pastes
+                .filter(author_name.eq(&p_name))
+                .order(created_at.desc())
+                .load(&conn)
+        })
+        .await
     }
 
     /// Insert our paste into the database.

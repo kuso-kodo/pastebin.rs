@@ -17,6 +17,7 @@ CREATE TABLE pastes (
     lang TEXT NOT NULL,
     content TEXT NOT NULL,
     author_name TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL,
 
     FOREIGN KEY (author_name) REFERENCES users(username) ON DELETE CASCADE
 );

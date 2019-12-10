@@ -22,12 +22,12 @@ function submitPaste() {
     }
     console.log(data);
     var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance
-    xmlhttp.open("POST", "/new");
+    xmlhttp.open("POST", "/api/new");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(data));
     xmlhttp.onload  = function() {
         var jsonResponse = JSON.parse(xmlhttp.response);
-        window.location.href = "/get/" + jsonResponse['id'];
+        window.location.href = "/paste/" + jsonResponse['id'];
      };
 }
 
@@ -37,7 +37,7 @@ function loginUser() {
     data['password'] = loginForm.password.value;
     console.log(data);
     var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance
-    xmlhttp.open("POST", "/login");
+    xmlhttp.open("POST", "/api/login");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(data));
     xmlhttp.onload  = function() {
@@ -60,7 +60,7 @@ function registerUser() {
     data['password'] = registerForm.regpassword.value;
     console.log(data);
     var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance
-    xmlhttp.open("POST", "/register");
+    xmlhttp.open("POST", "/api/register");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(data));
     xmlhttp.onload  = function() {
@@ -76,7 +76,7 @@ function logoutUser() {
     data = {};
     data['token'] = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance
-    xmlhttp.open("POST", "/logout");
+    xmlhttp.open("POST", "/api/logout");
     xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xmlhttp.send(JSON.stringify(data));
     document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
@@ -89,13 +89,30 @@ function setNavBar() {
         linkA.removeAttribute('data-toggle');
         linkA.removeAttribute('data-target');
         linkA.innerText = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        linkA.setAttribute("href", "/user/" + linkA.innerText);
         linkB.removeAttribute('href');
         linkB.removeAttribute('data-toggle');
         linkB.removeAttribute('data-target');
         linkB.innerText = "Logout";
         linkB.setAttribute("onclick", "logoutUser()");
-        console.log('The cookie "reader" exists (ES6)')
     }
 }
+
+  $(function(){
+    $('#registerModal').keypress(function(e){
+      if(e.which == 13) {
+        registerUser(); 
+      }
+    })
+  })
+
+
+  $(function(){
+    $('#loginModal').keypress(function(e){
+      if(e.which == 13) {
+        loginUser(); 
+      }
+    })
+  })
 
 window.onload = setNavBar
