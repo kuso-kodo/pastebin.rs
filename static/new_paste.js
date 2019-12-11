@@ -70,7 +70,7 @@ function registerUser() {
         if (xmlhttp.status == 200) {
             $("#registerModal .close").click();
         } else {
-            registerForm.username.classList.add('is-invalid');
+            registerForm.regusername.classList.add('is-invalid');
         }
     };
 }
