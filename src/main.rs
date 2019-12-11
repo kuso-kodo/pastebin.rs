@@ -33,7 +33,7 @@ async fn main() -> Result<(), std::io::Error> {
     app.at("/api/new").post(crate::api::paste::new);
     app.at("/api/qr/:id").get(crate::api::paste::get_qrcode);
     app.at("/api/user/:username").get(crate::api::paste::list);
-    app.at("/api/paste/:id").get(crate::web::paste::get);
+    app.at("/api/paste/:id").get(crate::api::paste::get);
     // Web Pages
     app.at("/").get(crate::web::paste::new);
     app.at("/user/:username").get(crate::web::paste::list);
